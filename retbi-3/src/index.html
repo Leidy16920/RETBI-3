@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RETBI | Robot de Vigilancia Inteligente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+
+
+
+
+
+            background-color: #000000;
+            color: #e2e8f0;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+        .glass {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .text-neon {
+            color: #10b981;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+        }
+        .bg-neon-gradient {
+            background: linear-gradient(135deg, #064e3b 0%, #000000 100%);
+        }
+        .img-frame {
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            transition: all 0.5s ease;
+            overflow: hidden;
+            border-radius: 2rem;
+        }
+        .img-frame:hover {
+            border-color: #10b981;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+            transform: scale(1.02);
+        }
+        img { width: 100%; height: 100%; object-fit: cover; filter: saturate(1.2); }
+       
+        .btn-vivo {
+            background: #10b981;
+            color: black;
+            font-weight: 800;
+            padding: 15px 40px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .btn-vivo:hover {
+            transform: scale(1.05);
+            background: white;
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.8);
+        }
+
+        /* Ocultar páginas internas */
+        #pagina-interna, #seccion-jardin-info, #pagina-control { display: none; }
+
+        p { font-size: 16px; line-height: 1.8; text-align: justify; }
+       
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
+    </style>
+</head>
+<body class="selection:bg-emerald-500/40">
+
+    <!-- PÁGINA PRINCIPAL -->
+    <div id="pagina-principal">
+        <nav class="fixed top-0 w-full z-50 glass border-b border-emerald-900/50 py-5 px-10">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1 class="text-2xl font-black tracking-tighter text-neon italic">RETBI <span class="text-white not-italic">CAMERA</span></h1>
+                <div class="hidden md:flex space-x-10 text-[10px] uppercase tracking-[0.4em] font-bold">
+                    <a href="#inicio" class="hover:text-emerald-400 transition">Inicio</a>
+                    <a href="javascript:void(0)" onclick="cambiarPagina('jardin')" class="hover:text-emerald-400 transition text-emerald-400">Información Jardín Botánico</a>
+                    <a href="#anomalias" class="hover:text-emerald-400 transition">Anomalías</a>
+                    <a href="#proyecto" class="hover:text-emerald-400 transition">Proyecto</a>
+                    <a href="#impacto" class="hover:text-emerald-400 transition">Impacto</a>
+                </div>
+            </div>
+        </nav>
+
+        <header id="inicio" class="pt-48 pb-20 px-6 container mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold tracking-widest uppercase">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span> Sistema Activo
+                </div>
+                <h2 class="text-6xl md:text-8xl font-black leading-[0.9] text-white">RETBI <br><span class="text-neon"></span></h2>
+                <p class="text-slate-300">
+                    El proyecto de ingeniería RETBI (Robot de Vigilancia Inteligente) consiste en un carro autónomo diseñado para apoyar la seguridad y el monitoreo ambiental en espacios naturales. Este sistema integra sensores, cámaras y tecnología de desplazamiento que le permiten recorrer áreas amplias de forma eficiente, recolectando información en tiempo real sobre el estado del entorno.
+
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="cambiarPagina('vivo')" class="btn-vivo">Acceder al Vivo</button>
+                    <button onclick="cambiarPagina('control')" class="border border-emerald-500 text-emerald-400 font-bold uppercase text-xs tracking-wider px-8 py-4 rounded-full hover:bg-emerald-500 hover:text-black transition duration-300">Controlar Carro</button>
+                </div>
+            </div>
+            <!-- IMAGEN 1: PRINCIPAL -->
+            <div class="img-frame h-[500px] shadow-2xl shadow-emerald-900/20">
+                <img src="https://i.imgur.com/EyFsrGe.jpeg" alt="Vista Principal RETBI">
+            </div>
+        </header>
+
+        <section class="py-24 bg-zinc-950/50 border-y border-emerald-900/30">
+            <div class="container mx-auto px-6">
+                <p class="text-slate-400 mb-10">
+                    El proyecto está pensado para implementarse en lugares como el Jardín Botánico de Bogotá, ubicado en la localidad de Engativá. Este jardín, también conocido como José Celestino Mutis, es uno de los centros de investigación y conservación más importantes del país. Su función principal es proteger la biodiversidad, especialmente los ecosistemas de alta montaña como el páramo y el bosque andino, además de educar a la comunidad sobre el cuidado del medio ambiente.
+
+                </p>
+                <!-- IMAGEN 2: TROPICARIO -->
+                <div class="img-frame h-96 w-full">
+                    <img src="https://i.imgur.com/t2G2s7I.jpeg" alt="Tropicario Jardín Botánico">
+                </div>
+            </div>
+        </section>
+
+        <section id="anomalias" class="py-24 container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-20 items-center">
+                <div class="space-y-8">
+                    <h3 class="text-4xl font-extrabold text-white italic">🌳 Biodiversidad y Entorno</h3>
+                    <p class="text-slate-400">
+                        El Jardín Botánico alberga cientos de especies de plantas, muchas de ellas nativas y algunas en peligro de extinción. Su vegetación incluye colecciones de plantas medicinales, árboles andinos, orquídeas y especies acuáticas. Este entorno no solo es clave para la conservación, sino también para la regulación del clima urbano, la producción de oxígeno y la protección de la fauna que habita en la ciudad.
+
+                    </p>
+                    <div class="bg-emerald-950/30 border border-emerald-500/20 p-8 rounded-[2rem]">
+                        <p class="text-slate-300 italic">
+                            En este contexto, RETBI cumple un papel importante, ya que puede realizar recorridos constantes sin intervención humana directa. Entre sus funciones principales están la captura de imágenes y videos, la detección de movimientos sospechosos, el monitoreo del estado de los árboles y el registro de posibles riesgos ambientales.
+
+
+
+                        </p>
+                    </div>
+                </div>
+                <!-- IMÁGENES 3 Y 4: BIODIVERSIDAD -->
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="img-frame h-64">
+                        <img src="https://i.imgur.com/PQYF1IL.jpeg" alt="Biodiversidad Entorno 1">
+                    </div>
+                    <div class="img-frame h-64 translate-y-12">
+                        <img src="https://i.imgur.com/831lZGc.jpeg" alt="Biodiversidad Entorno 2">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="proyecto" class="py-24 bg-neon-gradient">
+            <div class="container mx-auto px-6">
+                <p class="text-slate-300 mb-8">
+                    Por ejemplo, puede identificar señales de enfermedades en la vegetación, presencia de plagas, daños físicos en los troncos o ramas, y actividades humanas que afecten el entorno, como la tala ilegal o el ingreso a zonas restringidas. Además, REBTI contribuye a reducir riesgos para el personal humano, permitiendo inspeccionar zonas difíciles o amplias de manera más rápida y segura. También puede almacenar datos que luego sirven para análisis ambientales, ayudando a tomar decisiones sobre el cuidado y mantenimiento del jardín.
+
+                </p>
+                <div class="bg-black/40 p-6 rounded-2xl border border-emerald-500/20 text-sm text-slate-400 font-mono">
+                    >> SISTEMA RETBI: Monitoreo analítico ambiental de flora urbana inicializado...
+                </div>
+            </div>
+        </section>
+
+        <section id="impacto" class="py-24 container mx-auto px-6">
+            <p class="text-slate-400 mb-10">
+                Es importante tener en cuenta que los árboles del Jardín Botánico pueden verse afectados por diferentes factores, como el cambio climático, el aumento de la temperatura, la contaminación del aire, la compactación del suelo por el paso de personas, y la aparición de plagas o enfermedades. Estos problemas pueden debilitar los árboles, afectar su crecimiento e incluso causar su muerte si no se controlan a tiempo.
+            </p>
+            <!-- IMAGEN 5: IMPACTO -->
+            <div class="img-frame h-64 w-full">
+                <img src="https://i.imgur.com/hgzT0xO.jpeg" alt="Impacto Ambiental Forestal">
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE GALERÍA DEBAJO CON LAS 14 IMÁGENES COMPLETAS Y ORGANIZADAS -->
+        <section class="py-24 container mx-auto px-6 border-t border-emerald-900/30">
+            <h3 class="text-4xl font-black text-white italic mb-4 text-center">
+                📸 Exploración Visual y Entorno del Proyecto
+            </h3>
+            <p class="text-slate-400 text-center max-w-2xl mx-auto mb-12 text-sm">
+                 Estas imagenes fueron tomadas por nuestro equipo en los entornos biológicos del Jardín Botánico.
+            </p>
+           
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Registro de Secciones Superiores (Imágenes 1 a 5) -->
+                <div class="img-frame h-64 border-dashed border-emerald-500/50">
+                    <img src="https://i.imgur.com/EyFsrGe.jpeg" alt="1. Vista General">
+                </div>
+                <div class="img-frame h-64 border-dashed border-emerald-500/50">
+                    <img src="https://i.imgur.com/t2G2s7I.jpeg" alt="2. Invernadero Tropicario">
+                </div>
+                <div class="img-frame h-64 border-dashed border-emerald-500/50">
+                    <img src="https://i.imgur.com/PQYF1IL.jpeg" alt="3. Flora Detalle 1">
+                </div>
+                <div class="img-frame h-64 border-dashed border-emerald-500/50">
+                    <img src="https://i.imgur.com/831lZGc.jpeg" alt="4. Flora Detalle 2">
+                </div>
+                <div class="img-frame h-64 border-dashed border-emerald-500/50">
+                    <img src="https://i.imgur.com/hgzT0xO.jpeg" alt="5. Área de Preservación">
+                </div>
+
+                <!-- Bloque de Galería Secundaria de Imgur (Imágenes 6 a 14) -->
+                <div class="img-frame h-64">
+                    <img src="https://i.imgur.com/aOyJSkL.jpeg" alt="6. Captura de Campo RETBI">
+                </div>
+                <div class="img-frame h-64">
+                    <img src="https://i.imgur.com/SC60H05.jpeg" alt="7. Mapeo de Especies">
+                </div>
+                <div class="img-frame h-64">
+                    <img src="https://i.imgur.com/SH0hQAr.jpeg" alt="8. Control Biométrico">
+                </div>
+                <div class="img-frame h-64">
+                    <img src="https://i.imgur.com/P7u4a4n.jpeg" alt="9. Sendero Forestal">
+                </div>
+                <div class="img-frame h-64">
+                    <img src="https://i.imgur.com/evwLDK6.jpeg" alt="10. Muestra Botánica">
+                </div>
+                <div class="img-frame h-64">
+                    <img src="https://i.imgur.com/zFgeqAB.jpeg" alt="11. Vegetación Nativa">
+                </div>
+                <div class="img-frame h-64">
+                    <img src="https://i.imgur.com/s5bbve2.jpeg" alt="12. Cobertura Bosque Andino">
+                </div>
+                <div class="img-frame h-64">
+                    <img src="https://i.imgur.com/rTMdy4r.jpeg" alt="13. Monitoreo de Suelos">
+                </div>
+                <div class="img-frame h-64">
+                    <img src="https://i.imgur.com/6prwbNs.jpeg" alt="14. Análisis de Riesgos">
+                </div>
+            </div>
+        </section>
+<!-- NUEVA SECCIÓN -->
+<section class="py-24 bg-zinc-950/60 border-t border-emerald-900/30">
+    <div class="container mx-auto px-6">
+
+        <div class="text-center mb-16">
+            <h3 class="text-5xl font-black text-white italic mb-6">
+                🌿 Conservación Ecosistémica y de Biodiversidad
+            </h3>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <!-- CARD 1 -->
+            <div class="glass p-8 rounded-[2rem] border border-emerald-500/20">
+                <h4 class="text-2xl font-black text-emerald-400 mb-4">
+                    🏔️ Especialista en ecosistemas altoandinos
+                </h4>
+
+                <p class="text-slate-400 leading-relaxed">
+                    Es el único jardín botánico de Colombia enfocado en preservar y recopilar especies de los ecosistemas de páramo y de alta montaña.
+                </p>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="glass p-8 rounded-[2rem] border border-emerald-500/20">
+                <h4 class="text-2xl font-black text-emerald-400 mb-4">
+                    🌱 Colecciones vivas masivas
+                </h4>
+
+                <p class="text-slate-400 leading-relaxed">
+                    Custodia un inventario georreferenciado con más de 19,500 accesiones de plantas vivas, sumando cerca de 2,330 especies vegetales de distintas familias botánicas.
+                </p>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="glass p-8 rounded-[2rem] border border-emerald-500/20">
+                <h4 class="text-2xl font-black text-emerald-400 mb-4">
+                    🕊️ Santuario de fauna urbana
+                </h4>
+
+                <p class="text-slate-400 leading-relaxed">
+                    Sirve como un pulmón verde y refugio de paso crítico para decenas de especies de aves residentes y migratorias dentro de la densa matriz urbana de Bogotá.
+                </p>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="glass p-8 rounded-[2rem] border border-emerald-500/20">
+                <h4 class="text-2xl font-black text-emerald-400 mb-4">
+                    🌎 El Tropicario
+                </h4>
+
+                <p class="text-slate-400 leading-relaxed">
+                    Cuenta con el complejo de invernaderos más grande de Sudamérica, un circuito bioclimático que reproduce fielmente las condiciones de los diferentes pisos térmicos de Colombia para conservar flora.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+        <!-- SECCIÓN DE REFERENCIAS -->
+        <section class="py-12 container mx-auto px-6 border-t border-emerald-900/30">
+            <h4 class="text-emerald-500 font-bold text-xs uppercase tracking-widest mb-6">Referencias Bibliográficas</h4>
+            <div class="grid md:grid-cols-2 gap-8 text-[11px] text-zinc-500 font-mono uppercase tracking-tighter">
+                <div class="space-y-2">
+                    <p class="text-emerald-400/80 underline">Fuentes Oficiales:</p>
+                    <p>• Jardín Botánico de Bogotá "José Celestino Mutis". (2026). Portal de Información Biológica y Conservación. Recuperado de <a href="https://jbb.gov.co" class="hover:text-white">jbb.gov.co</a></p>
+                    <p>• Alcaldía Mayor de Bogotá. (2026). Sistema de Monitoreo Ambiental Local.</p>
+                </div>
+                <div class="space-y-2">
+                    <p class="text-emerald-400/80 underline">Desarrollo Técnico:</p>
+                    <p>• Equipo de Ingeniería RETBI. (2026). Documentación Técnica del Robot de Vigilancia Inteligente - Fase de Implementación.</p>
+                    <p>• Repositorio de Datos RETBI: Análisis de Patrones Biométricos en Flora Urbana.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-32 container mx-auto px-6 text-center">
+            <h3 class="text-5xl font-black text-neon mb-10 italic"> Conclusión</h3>
+            <p class="max-w-3xl mx-auto text-slate-300 text-2xl leading-relaxed font-light">
+                En conclusión, el proyecto RETBI representa una solución tecnológica innovadora que fortalece la vigilancia y el cuidado ambiental en espacios como el Jardín Botánico, aportando a la conservación de la biodiversidad y al uso responsable de la tecnología en beneficio del entorno natural.
+            </p>
+            <div class="mt-32 pt-10 border-t border-emerald-900/50">
+                <p class="text-[9px] text-zinc-700 font-mono tracking-[1em] uppercase">RETBI • 2026 • BOGOTÁ</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- PESTAÑA: INFORMACIÓN JARDÍN BOTÁNICO ACTUALIZADA -->
+    <div id="seccion-jardin-info" class="min-h-screen bg-black p-10 pt-32 overflow-y-auto">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex justify-between items-center mb-10 border-b border-emerald-500/30 pb-6">
+                <h2 class="text-4xl font-black text-neon italic">INFORMACIÓN JARDÍN BOTÁNICO</h2>
+                <button onclick="cambiarPagina('principal')" class="text-white border border-emerald-500/50 px-8 py-2 rounded-full hover:bg-emerald-500 hover:text-black transition font-bold uppercase text-xs">
+                    Volver al Inicio
+                </button>
+            </div>
+
+            <div class="grid gap-12">
+                <!-- SECCIÓN 1: RIQUEZA BIOLÓGICA -->
+                <div class="glass p-10 rounded-[2.5rem] border-l-4 border-l-emerald-500">
+                    <h3 class="text-3xl font-black text-white mb-6 uppercase tracking-tight">1. Vegetación y Especies (Riqueza Biológica)</h3>
+                    <p class="text-slate-300 mb-8 text-lg">El JBB es un "museo vivo" que alberga más de <strong>1,300 especies</strong>. Su mayor orgullo es el Tropicario, un complejo de invernaderos que recrea diversos climas de Colombia:</p>
+                   
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <div class="bg-emerald-900/20 p-4 rounded-xl border border-emerald-500/10">
+                                <h4 class="text-emerald-400 font-bold mb-2">Especies de Páramo</h4>
+                                <p class="text-sm text-slate-400">Es de los pocos lugares del mundo que logra mantener <strong>Frailejones</strong> fuera de su hábitat natural. También verás vegetación de alta montaña como el Siete Cueros.</p>
+                            </div>
+                            <div class="bg-emerald-900/20 p-4 rounded-xl border border-emerald-500/10">
+                                <h4 class="text-emerald-400 font-bold mb-2">Bosque Andino</h4>
+                                <p class="text-sm text-slate-400">Árboles nativos como el <strong>Nogal</strong> (árbol insignia de Bogotá), el Roble y el Cedro.</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="bg-emerald-900/20 p-4 rounded-xl border border-emerald-500/10">
+                                <h4 class="text-emerald-400 font-bold mb-2">Colecciones Especializadas</h4>
+                                <p class="text-sm text-slate-400">Variedad de orquídeas (flor nacional), bromelias, cactus y plantas medicinales/útiles.</p>
+                            </div>
+                            <div class="bg-emerald-900/20 p-4 rounded-xl border border-emerald-500/10">
+                                <h4 class="text-emerald-400 font-bold mb-2">Amazonía y Chocó</h4>
+                                <p class="text-sm text-slate-400">Especies de selva húmeda tropical, incluyendo palmas y plantas acuáticas gigantes como la <strong>Victoria amazonica</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN 2: PROBLEMÁTICAS -->
+                <div class="glass p-10 rounded-[2.5rem] border-l-4 border-l-red-500">
+                    <h3 class="text-3xl font-black text-white mb-6 uppercase tracking-tight">2. Problemáticas Actuales (Desafíos)</h3>
+                    <p class="text-slate-300 mb-8 text-lg">A pesar de su importancia científica, el jardín y el sistema forestal de Bogotá enfrentan crisis severas:</p>
+                   
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="flex gap-4 items-start">
+                            <div class="w-2 h-2 bg-red-500 rounded-full mt-2 shrink-0"></div>
+                            <div>
+                                <h5 class="text-white font-bold">Vandalismo y Daño Ambiental</h5>
+                                <p class="text-sm text-slate-400">Denuncias sobre tala ilegal y descortezamiento de árboles nativos en zonas de reserva, afectando ejemplares de más de 60 años.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-2 h-2 bg-red-500 rounded-full mt-2 shrink-0"></div>
+                            <div>
+                                <h5 class="text-white font-bold">Especies Invasoras</h5>
+                                <p class="text-sm text-slate-400">Lucha contra el avance del <strong>Retamo Espinoso</strong>, Pino y Eucalipto que acidifican el suelo.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-2 h-2 bg-red-500 rounded-full mt-2 shrink-0"></div>
+                            <div>
+                                <h5 class="text-white font-bold">Crisis Climática</h5>
+                                <p class="text-sm text-slate-400">Sequías prolongadas que aumentan el riesgo de incendios en los Cerros Orientales.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="w-2 h-2 bg-red-500 rounded-full mt-2 shrink-0"></div>
+                            <div>
+                                <h5 class="text-white font-bold">Urbanización</h5>
+                                <p class="text-sm text-slate-400">Fragmentación de corredores ecológicos que dificulta la conexión con cerros y humedales.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- REFERENCIAS DENTRO DE LA PESTAÑA -->
+                <div class="text-[10px] text-zinc-600 font-mono text-center pt-6">
+                    <p>FUENTES: JARDÍN BOTÁNICO DE BOGOTÁ | DOCUMENTACIÓN TÉCNICA RETBI 2026</p>
+                </div>
+
+                <div class="bg-emerald-500/10 p-10 rounded-[2rem] border border-emerald-500/30 text-center">
+                    <p class="text-xl text-emerald-400 italic font-light">
+                        "El Jardín Botánico hoy no es solo un lugar de paseo; es un centro de resistencia ecológica que intenta salvar especies de páramo mientras combate el vandalismo y el impacto del crecimiento urbano."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PÁGINA INTERNA (VIVO) -->
+    <div id="pagina-interna" class="min-h-screen bg-black p-10 pt-32">
+        <div class="flex justify-between items-center mb-10">
+            <h2 class="text-3xl font-black text-neon italic uppercase">RETBI_LIVE_MONITOR</h2>
+            <button onclick="cambiarPagina('principal')" class="text-white border border-emerald-500/50 px-6 py-2 rounded-full hover:bg-emerald-500 hover:text-black transition font-bold text-xs uppercase">
+                Cerrar Monitor
+            </button>
+        </div>
+        <div class="grid lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 aspect-video bg-zinc-900 rounded-[2rem] border-2 border-emerald-500 flex items-center justify-center relative overflow-hidden">
+                <div class="absolute top-4 left-4 bg-red-600 px-2 py-1 text-[10px] font-bold animate-pulse">LIVE FEED</div>
+                <p class="font-mono text-emerald-500 text-xs">RETBI_SYSTEM: BUSCANDO SEÑAL DE CÁMARA...</p>
+            </div>
+            <div class="space-y-6">
+                <div class="glass p-6 rounded-3xl">
+                    <h4 class="text-emerald-400 font-bold text-xs mb-4 uppercase">Estado de Sensores</h4>
+                    <ul class="font-mono text-[10px] space-y-2">
+                        <li>SISTEMA: ACTIVO</li>
+                        <li>BATERÍA: 92%</li>
+                        <li>HUMEDAD: 65%</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NUEVA PÁGINA INTERNA: MANUAL CONTROL (DABBLE INTERFACE) -->
+    <div id="pagina-control" class="min-h-screen bg-black p-10 pt-32">
+        <div class="flex justify-between items-center mb-10 border-b border-emerald-500/20 pb-6">
+            <div>
+                <h2 class="text-3xl font-black text-neon italic uppercase">RETBI_MANUAL_CONTROL</h2>
+                <p class="font-mono text-[10px] text-zinc-500 mt-1">MÓDULO DE HARDWARE INTEGRADO VÍA DABBLE APP</p>
+            </div>
+            <button onclick="cambiarPagina('principal')" class="text-white border border-emerald-500/50 px-6 py-2 rounded-full hover:bg-emerald-500 hover:text-black transition font-bold text-xs uppercase">
+                Cerrar Control
+            </button>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- MÓDULO DE CONEXIÓN BLUETOOTH -->
+            <div class="glass p-8 rounded-[2rem] flex flex-col justify-between border-emerald-500/30">
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-emerald-400 font-bold text-xs uppercase tracking-wider">Vinculación Dabble</h4>
+                        <span id="bluetooth-status" class="px-3 py-1 bg-zinc-800 border border-zinc-700 text-zinc-400 rounded-full text-[9px] font-mono uppercase">Desconectado</span>
+                    </div>
+                   
+                    <div class="p-6 bg-zinc-950/80 rounded-2xl border border-emerald-500/10 space-y-4">
+                        <p class="text-xs font-mono text-slate-400">Selecciona el módulo Bluetooth asignado al carro (HC-05 / HM-10):</p>
+                        <select id="dispositivo-bt" class="w-full bg-black border border-emerald-500/30 rounded-xl px-4 py-3 text-xs font-mono text-emerald-400 focus:outline-none focus:border-emerald-500">
+                            <option>RETBI_ROBOT_B1_V4</option>
+                            <option>DABBLE_MODULE_ESP32</option>
+                        </select>
+                        <button onclick="simularConexion()" id="btn-conectar" class="w-full bg-emerald-500 text-black text-xs font-bold py-3 rounded-xl uppercase tracking-widest transition hover:bg-white">
+                            Conectar Módulo
+                        </button>
+                    </div>
+
+                    <div class="space-y-2 font-mono text-[10px] text-zinc-500">
+                        <p>• Protocolo: Serial UART via Bluetooth</p>
+                        <p>• Configuración App: Input Módulo Gamepad</p>
+                        <p>• Estado de Baudios: 9600 bps</p>
+                    </div>
+                </div>
+                <p class="text-[9px] text-zinc-600 font-bold uppercase text-center border-t border-emerald-900/50 pt-4 mt-6">
+                    MÓDULO DE NAVEGACIÓN RETBI
+                </p>
+            </div>
+
+            <!-- INTERFAZ DIGITAL DEL GAMEPAD (DIRECCIONALES) -->
+            <div class="lg:col-span-2 glass p-8 rounded-[2rem] border-emerald-500/30 flex flex-col justify-between">
+                <h4 class="text-emerald-400 font-bold text-xs uppercase tracking-wider mb-8">Terminal Remota (Esquema Dabble Gamepad)</h4>
+               
+                <div class="grid md:grid-cols-2 gap-12 my-auto items-center justify-center p-6">
+                    <!-- Pad Direccional (Izquierda) -->
+                    <div class="flex flex-col items-center justify-center space-y-2">
+                        <button class="w-16 h-16 bg-zinc-900 border-2 border-emerald-500/30 rounded-xl active:bg-emerald-500 active:text-black flex items-center justify-center text-xl font-bold transition">▲</button>
+                        <div class="flex space-x-16">
+                            <button class="w-16 h-16 bg-zinc-900 border-2 border-emerald-500/30 rounded-xl active:bg-emerald-500 active:text-black flex items-center justify-center text-xl font-bold transition">◀</button>
+                            <button class="w-16 h-16 bg-zinc-900 border-2 border-emerald-500/30 rounded-xl active:bg-emerald-500 active:text-black flex items-center justify-center text-xl font-bold transition">▶</button>
+                        </div>
+                        <button class="w-16 h-16 bg-zinc-900 border-2 border-emerald-500/30 rounded-xl active:bg-emerald-500 active:text-black flex items-center justify-center text-xl font-bold transition">▼</button>
+                    </div>
+
+                    <!-- Botones de Acción (Derecha) -->
+                    <div class="grid grid-cols-2 gap-6 max-w-[240px] mx-auto">
+                        <button class="w-16 h-16 bg-zinc-900 border border-emerald-500/20 rounded-full active:bg-emerald-500 active:text-black font-mono text-xs font-bold transition">📸 2</button>
+                        <button class="w-16 h-16 bg-zinc-900 border border-emerald-500/20 rounded-full active:bg-emerald-500 active:text-black font-mono text-xs font-bold transition">🚨 3</button>
+                        <button class="w-16 h-16 bg-zinc-900 border border-emerald-500/20 rounded-full active:bg-emerald-500 active:text-black font-mono text-xs font-bold transition">🛠️ 4</button>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-black/50 border border-emerald-500/10 rounded-xl p-4">
+                    <p id="consola-log" class="font-mono text-[10px] text-emerald-500/60 text-left">>> Esperando enlace Dabble para iniciar transmisión de datos de control...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function cambiarPagina(destino) {
+            const principal = document.getElementById('pagina-principal');
+            const vivo = document.getElementById('pagina-interna');
+            const jardin = document.getElementById('seccion-jardin-info');
+            const control = document.getElementById('pagina-control');
+
+            principal.style.display = 'none';
+            vivo.style.display = 'none';
+            jardin.style.display = 'none';
+            control.style.display = 'none';
+
+            if(destino === 'vivo') {
+                vivo.style.display = 'block';
+            } else if(destino === 'jardin') {
+                jardin.style.display = 'block';
+            } else if(destino === 'control') {
+                control.style.display = 'block';
+            } else {
+                principal.style.display = 'block';
+            }
+            window.scrollTo(0,0);
+        }
+
+        function simularConexion() {
+            const status = document.getElementById('bluetooth-status');
+            const log = document.getElementById('consola-log');
+            const btn = document.getElementById('btn-conectar');
+            const dispositivo = document.getElementById('dispositivo-bt').value;
+
+            if (btn.innerText === "CONECTAR MÓDULO") {
+                status.innerText = "Conectando...";
+                status.className = "px-3 py-1 bg-yellow-500/10 border border-yellow-500 text-yellow-400 rounded-full text-[9px] font-mono uppercase animate-pulse";
+               
+                setTimeout(() => {
+                    status.innerText = "Conectado";
+                    status.className = "px-3 py-1 bg-emerald-500/10 border border-emerald-500 text-emerald-400 rounded-full text-[9px] font-mono uppercase";
+                    log.innerText = `>> Conexión exitosa con ${dispositivo} a través de la interfaz virtual Dabble. Pines RX/TX sincronizados de manera correcta. Listo para procesar mapeo analógico.`;
+                    btn.innerText = "Desconectar Módulo";
+                    btn.className = "w-full bg-red-600 text-white text-xs font-bold py-3 rounded-xl uppercase tracking-widest transition hover:bg-white hover:text-black";
+                }, 1500);
+            } else {
+                status.innerText = "Desconectado";
+                status.className = "px-3 py-1 bg-zinc-800 border border-zinc-700 text-zinc-400 rounded-full text-[9px] font-mono uppercase";
+                log.innerText = ">> Enlace de control finalizado. El carro ha regresado a modo de espera autónomo.";
+                btn.innerText = "CONECTAR MÓDULO";
+                btn.className = "w-full bg-emerald-500 text-black text-xs font-bold py-3 rounded-xl uppercase tracking-widest transition hover:bg-white";
+            }
+        }
+    </script>
+
+</body>
+</html>
+
